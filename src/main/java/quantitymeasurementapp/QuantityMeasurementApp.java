@@ -1,4 +1,4 @@
-package quantitymeasurementapp;
+package quantitymeasurementapp ;
 
 import quantitymeasurementapp.Length.LengthUnit;
 
@@ -124,6 +124,13 @@ public class QuantityMeasurementApp {
 	    	len1 = len1.add(len2);
 	    	return len1;
 	    }
+	    
+	    public static Length demonstrateLengthAddition(Length len1,Length len2,LengthUnit targetUnit) throws InvalidUnitMeasurementException{
+	    	if(len1==null||len2==null||targetUnit==null) {
+	    		throw new IllegalArgumentException("Invalid Input");
+	    	}
+	    	return len1.add(len2, targetUnit);
+	    }
 	
       public static void main(String[] args) throws InvalidUnitMeasurementException {
     	  
@@ -169,6 +176,23 @@ public class QuantityMeasurementApp {
        System.out.println("Addition of Feet and Inches : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET), new Length(0.0,LengthUnit.INCHES)).toString());
        
        System.out.println("Addition of Feet with minus inche : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET), new Length(-3.0,LengthUnit.FEET)).toString());
+       
+      //Addition with specific target 
+       System.out.println("Addition of Feet with inche to Feet : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.FEET),new Length(12.0,LengthUnit.INCHES),LengthUnit.FEET));
+       
+       System.out.println("Addition of Feet with Inches to Inches : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.FEET),new Length(12.0,LengthUnit.INCHES),LengthUnit.INCHES));
+      
+       System.out.println("Addition of Feet with inches to Yards : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.FEET),new Length(12.0,LengthUnit.INCHES),LengthUnit.YARD));
+       
+       System.out.println("Addition of Yards with Feet to Yards : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.YARD),new Length(3.0,LengthUnit.FEET),LengthUnit.YARD));
+       
+       System.out.println("Addition of Inches with yards to Feet : "+demonstrateLengthAddition(new Length(36.0,LengthUnit.INCHES),new Length(1.0,LengthUnit.YARD),LengthUnit.FEET));
+       
+       System.out.println("Addition of Centimeters with Inches to Centimeter : "+demonstrateLengthAddition(new Length(2.54,LengthUnit.CENTIMETRE),new Length(1.0,LengthUnit.INCHES),LengthUnit.CENTIMETRE));
+       
+       System.out.println("Addition of feet with inhces to yards : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET),new Length(0.0,LengthUnit.INCHES),LengthUnit.YARD));
+       
+       System.out.println("Addition of Feet with Feet to inches : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET),new Length(-2.0,LengthUnit.FEET),LengthUnit.INCHES));
       }
       
 }
