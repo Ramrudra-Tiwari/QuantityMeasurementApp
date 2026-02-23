@@ -1,5 +1,4 @@
-package quantitymeasurementapp   ;
-
+package quantitymeasurementapp    ;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,14 +8,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import quantitymeasurementapp.InvalidUnitMeasurementException;
-import quantitymeasurementapp.Length;
-import quantitymeasurementapp.Length.LengthUnit;
-import quantitymeasurementapp.QuantityMeasurementApp;
-import quantitymeasurementapp.QuantityMeasurementApp.FeetEquality;
-import quantitymeasurementapp.QuantityMeasurementApp.Inches;
+import quantitymeasurementapp .InvalidUnitMeasurementException;
+import quantitymeasurementapp .Length;
+import quantitymeasurementapp .Length.LengthUnit;
+import quantitymeasurementapp .QuantityMeasurementApp;
+import quantitymeasurementapp .QuantityMeasurementApp.FeetEquality;
+import quantitymeasurementapp .QuantityMeasurementApp.Inches;
 
-public class QuantityMeasurementAppTest{
+public class QuantityMeasurementAppTest {
 		
 		QuantityMeasurementApp.FeetEquality feet1;
 		QuantityMeasurementApp.FeetEquality feet2;
@@ -390,4 +389,104 @@ public class QuantityMeasurementAppTest{
     	len2 = new Length(0.002,LengthUnit.FEET);
     	assertEquals(0.003,len1.add(len2).getValue(),0.0001);
     }
-	 }
+    
+//    Addition of two unit two specific unit 
+    
+    @Test
+    public void testAdditionExplicitTargetUnitFeet() throws InvalidUnitMeasurementException {
+    	len1 = new Length(1.0,LengthUnit.FEET);
+    	len2 = new Length(12.0,LengthUnit.INCHES);
+    	assertEquals(2.0,len1.add(len2,LengthUnit.FEET).getValue());
+    }
+    
+    @Test
+    public void testAdditionExplicitTargetUnitInches() throws InvalidUnitMeasurementException{
+    	len1 = new Length(1.0,LengthUnit.FEET);
+    	len2 = new Length(12.0,LengthUnit.INCHES);
+    	assertEquals(24.0,len1.add(len2,LengthUnit.INCHES).getValue());
+    }
+    
+    @Test
+    public void testAdditionExplicitTargetUnitYards() throws InvalidUnitMeasurementException{
+    	len1 = new Length(1.0,LengthUnit.FEET);
+    	len2 = new Length(12.0,LengthUnit.INCHES);
+    	assertEquals(0.667,len1.add(len2,LengthUnit.YARD).getValue(),0.001);
+    }
+    
+    @Test
+    public void testAdditionExplicitTargetUnitCentimeter() throws InvalidUnitMeasurementException{
+    	len1 = new Length(1.0,LengthUnit.INCHES);
+    	len2 = new Length(1.0,LengthUnit.INCHES);
+    	assertEquals(5.08,len1.add(len2,LengthUnit.CENTIMETRE).getValue(),0.001);
+    }
+     @Test
+     public void testAdditionExplicitTargetUnitSameAsFirstOperand() throws InvalidUnitMeasurementException {
+    	 len1 = new Length(2.0,LengthUnit.YARD);
+     	len2 = new Length(3.0,LengthUnit.FEET);
+     	assertEquals(3.0,len1.add(len2,LengthUnit.YARD).getValue());
+     }
+     
+     @Test
+     public void testAdditionExplicitTargetUnitSameAsSecondOprand() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(2.0,LengthUnit.YARD);
+      	len2 = new Length(3.0,LengthUnit.FEET);
+      	assertEquals(9.0,len1.add(len2,LengthUnit.FEET).getValue());
+     }
+     
+     @Test
+     public void testAdditionTargetUnitCommutativity() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(1.0,LengthUnit.FEET);
+      	len2 = new Length(12.0,LengthUnit.INCHES);
+      	Length temp1 = len1.add(len2,LengthUnit.YARD);
+        len1 = new Length(12.0,LengthUnit.INCHES);
+     	len2 = new Length(1.0,LengthUnit.FEET);
+     	Length temp2 = len1.add(len2,LengthUnit.YARD);
+     	assertTrue(temp1.equals(temp2));
+     	
+     }
+     
+     @Test
+     public void testAdditionTargetUnitWithZero() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(5.0,LengthUnit.FEET);
+      	len2 = new Length(0.0,LengthUnit.INCHES);
+      	assertEquals(1.667,len1.add(len2,LengthUnit.YARD).getValue(),0.001);
+     }
+     
+     @Test
+     public void testAdditionTargetUnitNagativeValues() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(5.0,LengthUnit.FEET);
+      	len2 = new Length(-2.0,LengthUnit.FEET);
+      	assertEquals(36.0,len1.add(len2,LengthUnit.INCHES).getValue());
+     }
+     
+     @Test
+     public void testAdditionTargetUnitNullTargetUnit() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(2.0,LengthUnit.YARD);
+      	len2 = new Length(3.0,LengthUnit.FEET);
+      	assertThrows(IllegalArgumentException.class,()->{
+      		len1.add(len2,null);
+      	});
+     }
+     
+     @Test
+     public void testAdditionTargetUnitLargeToSmall() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(1000.0,LengthUnit.FEET);
+      	len2 = new Length(500.0,LengthUnit.FEET);
+      	assertEquals(18000.0,len1.add(len2,LengthUnit.INCHES).getValue());
+     }
+     
+     @Test
+     public void testAdditionTargetSmallToLarge() throws InvalidUnitMeasurementException{
+    	 len1 = new Length(12.0,LengthUnit.INCHES);
+      	len2 = new Length(12.0,LengthUnit.INCHES);
+      	assertEquals(0.667,len1.add(len2,LengthUnit.YARD).getValue(),0.001);
+     }
+     @Test
+     public void testAddition_ExplicitTargetUnit_PrecisionTolerance() throws InvalidUnitMeasurementException {
+         Length l1 = new Length(1.0, LengthUnit.FEET);
+         Length l2 = new Length(0.1, LengthUnit.FEET);
+         Length result = l1.add(l2, LengthUnit.INCHES);
+         assertEquals(13.2, result.getValue(),0.001);
+     } 
+    
+} 
