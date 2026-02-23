@@ -15,6 +15,7 @@ This project was implemented incrementally using:
 ✅ DRY (Don't Repeat Yourself) Principle
 ✅ Proper Unit Conversion Strategy
 🌳 Git Workflow
+```
 main
  └── dev
       ├── feature/UC1-FeetEquality
@@ -24,6 +25,7 @@ main
       ├── feature/UC5-UnitToUnit
       ├── feature/UC6-Addition-Of-Two-Length-Units
       └── feature/UC7-Addition-With-Target-Unit-Specification
+```
 📅 18 Feb 2026
 🔹 UC2 – Feet and Inches Measurement Equality
 Branch: feature/UC2-InchEquality
