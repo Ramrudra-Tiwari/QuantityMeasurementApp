@@ -1,17 +1,16 @@
 package quantitymeasurementapp;
 
-
-import java.lang.System.Logger.Level;
-import java.nio.file.attribute.AclEntryFlag;
-
 import quantitymeasurementapp.Length.LengthUnit;
 
 public class QuantityMeasurementApp {
+	
 	public static  class FeetEquality {
 	     private final double value;
+	     
 	     public FeetEquality() {
 			this.value = 0;
 			}
+	     
 	     public FeetEquality(double value) {
 	    	 if(Double.isNaN(value)) {
 	    		 throw new IllegalArgumentException("Invalid Feet value");
@@ -118,11 +117,21 @@ public class QuantityMeasurementApp {
 	    	l=l.convertTo(unit);
 	    	return l;
 	    }
+	    
+	    public static Length demonstrateLengthAddition(Length len1,Length len2) throws InvalidUnitMeasurementException {
+	    	if(len1==null||len2==null) throw new IllegalArgumentException("Invalid Input value");
+	    	
+	    	len1 = len1.add(len2);
+	    	return len1;
+	    }
 	
       public static void main(String[] args) throws InvalidUnitMeasurementException {
+    	  
 	    demonstrateFeetEquality(1,1);
 	    demonstrateInchesEquality(1, 1);
 	    demonstrateFeetInchComparison();
+	    
+	   //Equals demonstration 
 	   System.out.println("Are lengths equals : "+ demonstrateLengthEquality(new Length(1,LengthUnit.FEET),new Length(12,Length.LengthUnit.INCHES)));
 	   
 	   System.out.println("Are Yards and Inches equals : "+demonstrateLengthComparison(new Length(1,LengthUnit.YARD), new Length(36,LengthUnit.INCHES)));
@@ -133,6 +142,7 @@ public class QuantityMeasurementApp {
 	   
 	   System.out.println("Are Centimetre and Feet : "+demonstrateLengthComparison(new Length(30.48,LengthUnit.CENTIMETRE),new Length(1.0,LengthUnit.FEET)));
    
+	   //Conversion demonstration
        System.out.println("Convert Feet To Inche  : "+demonstrateLengthConversion(1.0,LengthUnit.FEET,LengthUnit.INCHES).toString());
        
        System.out.println("Convert Yard To Feet : "+demonstrateLengthConversion(3.0,LengthUnit.YARD,LengthUnit.FEET).toString());
@@ -142,6 +152,23 @@ public class QuantityMeasurementApp {
        System.out.println("Convert Centimetre to Inches : "+demonstrateLengthConversion(1.0, LengthUnit.CENTIMETRE, LengthUnit.INCHES));
        
        System.out.println("Convert Feet To Inches : "+demonstrateLengthConversion(0.0,LengthUnit.FEET, LengthUnit.INCHES));
+       
+       //Addition demonstration
+       System.out.println("Addition of Feet To Feet : "+demonstrateLengthAddition(new Length(1.0, LengthUnit.FEET), new Length(2.0,LengthUnit.FEET)).toString());
+      
+       System.out.println("Addition of Feet and Inche : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.FEET),new Length(12.0, LengthUnit.INCHES)).toString());
+       
+       System.out.println("Addition of Inche and Feet : "+demonstrateLengthAddition(new Length(12.0,LengthUnit.INCHES), new Length(1.0,LengthUnit.FEET)).toString());
+       
+       System.out.println("Addition of Yards and Feet : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.YARD), new Length(3.0,LengthUnit.FEET)).toString());
+       
+       System.out.println("Addition of Inches and Yards : "+demonstrateLengthAddition(new Length(36.0,LengthUnit.INCHES), new Length(1.0,LengthUnit.YARD)).toString());
+       
+       System.out.println("Addition of Centimeter and Inches : "+demonstrateLengthAddition(new Length(2.54,LengthUnit.CENTIMETRE),new Length(1.0,LengthUnit.INCHES)).toString());
+       
+       System.out.println("Addition of Feet and Inches : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET), new Length(0.0,LengthUnit.INCHES)).toString());
+       
+       System.out.println("Addition of Feet with minus inche : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET), new Length(-3.0,LengthUnit.FEET)).toString());
       }
       
 }
