@@ -37,15 +37,19 @@ public class Length {
      public double getValue() {
     	 return value;
      }
+     public LengthUnit getLen() {
+    	 return len;
+     }
+//     To convert value to their base unit  
      private double convertToBaseUnit() {
     	 return value*len.getConversionFactor();
      }
-    
      public boolean compare(Length lengthUnit) {
     	 if(lengthUnit==null)return false;
     	  return Math.abs(this.convertToBaseUnit() - lengthUnit.convertToBaseUnit()) < EPSILON;
 	}
      
+//     overrided .equals methods to check if two units are equal or not 
      @Override
     public boolean equals(Object obj) {
         if(this==obj) {
@@ -58,18 +62,25 @@ public class Length {
         return this.compare(l);
     }
      
-     
+     //override tostring method 
      @Override
 	public String toString() {
 		return "Length [value=" + value + ", len=" + len + "]";
 	}
-
+     
+    //Conversion of unit to current unit 
 	 public Length convertTo(LengthUnit unit) throws InvalidUnitMeasurementException {
     	 double converted = (this.value*len.getConversionFactor())/unit.getConversionFactor();
     	 return new Length(converted,unit);
      }
 	 
+	 //Add To length and convert Unit to current unit
+	 public Length add(Length thatLength) throws InvalidUnitMeasurementException {
+		 thatLength = thatLength.convertTo(len);
+		 return new Length(value+thatLength.value, len);
+	 }
 	 
+	 //Main Method to invoke the methods locally 
      public static void main(String[] args) throws InvalidUnitMeasurementException {
 		Length len1 = new Length(1,Length.LengthUnit.FEET);
 		Length len2 = new Length(12,Length.LengthUnit.INCHES);
