@@ -1,6 +1,6 @@
 # QuantityMeasurementApp
 
-feature/UC3-GenericQuantityClassForDRYPrinciple
+feature/UC4-ExtendedUnit
 
 🚀 Quantity Measurement Application
 📏 Test-Driven Development (TDD) | OOP | Clean Code | DRY Principle
@@ -20,7 +20,7 @@ main
       ├── feature/UC1-FeetEquality
       ├── feature/UC2-InchEquality
       ├── feature/UC3-GenericQuantityClassForDRYPrinciple
-      ├── feature/UC4-Extended-Unit-Support
+      ├── feature/UC4-ExtendedUnit
       ├── feature/UC5-Unit-to-Unit-Conversion
       ├── feature/UC6-Addition-Of-Two-Length-Units
       └── feature/UC7-Addition-With-Target-Unit-Specification
