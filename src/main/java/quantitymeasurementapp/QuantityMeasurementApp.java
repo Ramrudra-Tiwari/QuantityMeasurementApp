@@ -1,6 +1,7 @@
 package quantitymeasurementapp ;
 
 
+
 public class QuantityMeasurementApp {
 
     public static<T extends IMeasurable> boolean demonstrateEquality(Quantity<T> quantity1,Quantity<T> quantity2) {
@@ -21,6 +22,23 @@ public class QuantityMeasurementApp {
     public static <T extends IMeasurable> Quantity<T> demonstrateAddition(Quantity<T> quantity1, Quantity<T> quantity2,T targetUnit){
     	if(targetUnit.getClass()!=quantity1.getUnit().getClass()||targetUnit.getClass()!=quantity2.getUnit().getClass()) throw new IllegalArgumentException("Invalid Unit Does Not Match");
     	return quantity1.add(quantity2,targetUnit);
+    }
+    
+    public static <T extends IMeasurable> Quantity<T> demonstrateDivision(Quantity<T> val1,Quantity<T> val2){
+    	if(val1.getUnit().getClass()!=val2.getUnit().getClass()) throw new IllegalArgumentException("Invalid Argument Exception ");
+    	return val1.division(val2);
+    }
+    public static <T extends IMeasurable> Quantity<T> demonstrateDivision(Quantity<T> val1,Quantity<T> val2,T target){
+    	if(val1.getUnit().getClass()!=val2.getUnit().getClass()||target.getClass()!=val1.getUnit().getClass()||target.getClass()!=val2.getUnit().getClass()) throw new IllegalArgumentException("Invalid Argument Exception ");
+    	return val1.division(val2,target);
+    }
+    public static <T extends IMeasurable> Quantity<T> demonstrateSubtract(Quantity<T> val1,Quantity<T> val2){
+    	if(val1.getUnit().getClass()!=val2.getUnit().getClass()) throw new IllegalArgumentException("Invalid Argument Exception ");
+    	return val1.subtract(val2);
+    }
+    public static <T extends IMeasurable> Quantity<T> demonstrateSubtract(Quantity<T> val1,Quantity<T> val2,T target){
+    	if(val1.getUnit().getClass()!=val2.getUnit().getClass()||target.getClass()!=val1.getUnit().getClass()||target.getClass()!=val2.getUnit().getClass()) throw new IllegalArgumentException("Invalid Argument Exception ");
+    	return val1.subtract(val2,target);
     }
     
     public static void main(String[] args) {
@@ -57,6 +75,19 @@ public class QuantityMeasurementApp {
         
         System.out.println("Addition of litre with mililitre : "+demonstrateAddition(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE),new Quantity<VolumneUnit>(1000.0, VolumneUnit.MILLILITRE)));
         
+//        Arthimetic operation
+        System.out.println("Subtraction of Feet and Inches : "+demonstrateSubtract(new Quantity<LengthUnit>(10.0,LengthUnit.FEET),new Quantity<LengthUnit>(6.0,LengthUnit.INCHES)));
+        
+        System.out.println("Subtraction of Kg and Gram : "+demonstrateSubtract(new Quantity<WeightUnit>(10.0,WeightUnit.KG), new Quantity<WeightUnit>(5000.0, WeightUnit.GRAM)));
+        
+        System.out.println("Subtraction of Litre and mililitre : "+demonstrateSubtract(new Quantity<VolumneUnit>(5.0, VolumneUnit.LITRE), new Quantity<VolumneUnit>(500.0,VolumneUnit.MILLILITRE)));
+        
+        System.out.println("Subtraction of feet with inche to inche : "+demonstrateSubtract(new Quantity<LengthUnit>(10.0, LengthUnit.FEET),new Quantity<LengthUnit>(6.0,LengthUnit.INCHES),LengthUnit.INCHES));
+        
+        System.out.println("Subtraction of kg with gram to gram : "+demonstrateSubtract(new Quantity<WeightUnit>(10.0,WeightUnit.KG),new Quantity<WeightUnit>(5000.0,WeightUnit.GRAM),WeightUnit.GRAM));
+        
+        System.out.println("Division of Feet with feet : "+demonstrateDivision(new Quantity<LengthUnit>(10.0, LengthUnit.FEET), new Quantity<LengthUnit>(2.0, LengthUnit.FEET)));
        
+        System.out.println("Division of inche with feet : "+demonstrateDivision(new Quantity<LengthUnit>(24.0,LengthUnit.INCHES),new Quantity<LengthUnit>(2.0,LengthUnit.FEET)));
 	}
 }
