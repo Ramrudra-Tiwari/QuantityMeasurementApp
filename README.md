@@ -1,6 +1,7 @@
 # QuantityMeasurementApp
 
-feature/UC8-standalone
+feature/UC9-WeightMeasurement
+
 
 🚀 Quantity Measurement Application
 📏 Test-Driven Development (TDD) | OOP | Clean Code | DRY Principle
@@ -25,6 +26,7 @@ main
       ├── feature/UC6-UnitAddition
       └── feature/UC7-targetUnitAddition
       └── feature/UC8-standalone
+      └── feature/UC9-WeightMeasurement
 📅 18 Feb 2026
 🔹 UC2 – Feet and Inches Measurement Equality
 Branch: feature/UC2-InchEquality
