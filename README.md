@@ -1,6 +1,7 @@
 # QuantityMeasurementApp
 
-feature/UC9-WeightMeasurement
+feature/UC10-GenericQuantity
+here  
 
 
 🚀 Quantity Measurement Application
@@ -27,6 +28,8 @@ main
       └── feature/UC7-targetUnitAddition
       └── feature/UC8-standalone
       └── feature/UC9-WeightMeasurement
+      └── feature/UC10-GenericQuantity
+          
 📅 18 Feb 2026
 🔹 UC2 – Feet and Inches Measurement Equality
 Branch: feature/UC2-InchEquality
