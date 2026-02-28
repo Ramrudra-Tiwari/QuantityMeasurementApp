@@ -1,4 +1,6 @@
 package quantitymeasurementapp ;
+
+
 public class QuantityMeasurementApp {
 
     public static<T extends IMeasurable> boolean demonstrateEquality(Quantity<T> quantity1,Quantity<T> quantity2) {
@@ -39,5 +41,22 @@ public class QuantityMeasurementApp {
 	    System.out.println("Convert Kg To Gram : "+demonstrateConversion(w1,WeightUnit.GRAM));
 	    System.out.println("Addition of Kg and Gram : "+demonstrateAddition(w1, w2,WeightUnit.KG));
 	    
+//	    Volume Unit
+	    
+	    System.out.println("Is Litre equal Litre : "+demonstrateEquality(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE),new Quantity<VolumneUnit>(1.0, VolumneUnit.LITRE)));
+	    
+        System.out.println("Is Litre equal Mililitre : "+demonstrateEquality(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE),new Quantity<VolumneUnit>(1000.0, VolumneUnit.MILLILITRE)));
+        
+        System.out.println("Is Gallon equal Gallon : "+demonstrateAddition(new Quantity<VolumneUnit>(1.0,VolumneUnit.GALLON),new Quantity<VolumneUnit>(1.0, VolumneUnit.GALLON)));
+        
+        System.out.println("Is Mililitre equal Litre : "+demonstrateEquality(new Quantity<VolumneUnit>(500.0,VolumneUnit.MILLILITRE),new Quantity<VolumneUnit>(0.5, VolumneUnit.LITRE)));
+        
+        System.out.println("Is Litre equal Gallon : "+demonstrateEquality(new Quantity<VolumneUnit>(3.78541,VolumneUnit.LITRE),new Quantity<VolumneUnit>(1.0, VolumneUnit.GALLON)));
+        
+        System.out.println("Addition of Litre with Litre : "+demonstrateAddition(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE),new Quantity<VolumneUnit>(2.0, VolumneUnit.LITRE)));
+        
+        System.out.println("Addition of litre with mililitre : "+demonstrateAddition(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE),new Quantity<VolumneUnit>(1000.0, VolumneUnit.MILLILITRE)));
+        
+       
 	}
 }
