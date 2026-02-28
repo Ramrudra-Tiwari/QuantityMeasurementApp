@@ -1,6 +1,6 @@
 package quantitymeasurementapp ;
 
-import quantitymeasurementapp.Length.LengthUnit;
+import quantitymeasurementapp.LengthUnit;
 
 public class QuantityMeasurementApp {
 	
@@ -81,20 +81,20 @@ public class QuantityMeasurementApp {
 	    }
 	    public static void demonstrateFeetInchComparison() throws InvalidUnitMeasurementException {
 
-	        Length oneFoot = new Length(1, Length.LengthUnit.FEET);
-	        Length twelveInches = new Length(12, Length.LengthUnit.INCHES);
+	        Length oneFoot = new Length(1, LengthUnit.FEET);
+	        Length twelveInches = new Length(12, LengthUnit.INCHES);
 
 	        System.out.println("1 Foot == 12 Inches ? : " 
 	                + oneFoot.equals(twelveInches));
 
-	        Length twoFeet = new Length(2, Length.LengthUnit.FEET);
-	        Length twentyFourInches = new Length(24, Length.LengthUnit.INCHES);
+	        Length twoFeet = new Length(2,LengthUnit.FEET);
+	        Length twentyFourInches = new Length(24, LengthUnit.INCHES);
 
 	        System.out.println("2 Feet == 24 Inches ? : " 
 	                + twoFeet.equals(twentyFourInches));
 
-	        Length oneInch = new Length(1, Length.LengthUnit.INCHES);
-	        Length oneFootAgain = new Length(1, Length.LengthUnit.FEET);
+	        Length oneInch = new Length(1, LengthUnit.INCHES);
+	        Length oneFootAgain = new Length(1, LengthUnit.FEET);
 
 	        System.out.println("1 Inch == 1 Foot ? : " 
 	                + oneInch.equals(oneFootAgain));
@@ -139,7 +139,7 @@ public class QuantityMeasurementApp {
 	    demonstrateFeetInchComparison();
 	    
 	   //Equals demonstration 
-	   System.out.println("Are lengths equals : "+ demonstrateLengthEquality(new Length(1,LengthUnit.FEET),new Length(12,Length.LengthUnit.INCHES)));
+	   System.out.println("Are lengths equals : "+ demonstrateLengthEquality(new Length(1,LengthUnit.FEET),new Length(12,LengthUnit.INCHES)));
 	   
 	   System.out.println("Are Yards and Inches equals : "+demonstrateLengthComparison(new Length(1,LengthUnit.YARD), new Length(36,LengthUnit.INCHES)));
 	   
@@ -193,6 +193,23 @@ public class QuantityMeasurementApp {
        System.out.println("Addition of feet with inhces to yards : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET),new Length(0.0,LengthUnit.INCHES),LengthUnit.YARD));
        
        System.out.println("Addition of Feet with Feet to inches : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET),new Length(-2.0,LengthUnit.FEET),LengthUnit.INCHES));
+       
+       //Refactoring Unit Enum to Standalone with Conversion Responsibility
+       System.out.println("convert feet to inches : "+demonstrateLengthConversion(new Length(1.0,LengthUnit.FEET),LengthUnit.INCHES));
+       
+       System.out.println("addition of feet with inches to feet : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.FEET),new Length(12,LengthUnit.INCHES),LengthUnit.FEET));
+       
+       System.out.println("equals to object : "+new Length(36.0,LengthUnit.INCHES).equals(new Length(1.0,LengthUnit.YARD)));
+       
+       System.out.println("Addition  : "+demonstrateLengthAddition(new Length(1.0,LengthUnit.YARD),new Length(3.0,LengthUnit.FEET),LengthUnit.YARD));
+       
+       System.out.println("Conversion : "+demonstrateLengthConversion(new Length(2.54,LengthUnit.CENTIMETRE),LengthUnit.INCHES));
+       
+       System.out.println("Addition : "+demonstrateLengthAddition(new Length(5.0,LengthUnit.FEET),new Length(0.0,LengthUnit.INCHES),LengthUnit.FEET));
+       
+       System.out.println("ConvertToBaseUnit : "+LengthUnit.FEET.convertToBaseUnit(12.0));
+       
+       System.out.println("ConvertToBaseUnit : "+LengthUnit.INCHES.convertToBaseUnit(12.0));
       }
       
 }
