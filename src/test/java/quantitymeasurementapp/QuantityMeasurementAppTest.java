@@ -1,5 +1,6 @@
 package quantitymeasurementapp    ;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,11 +10,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import quantitymeasurementapp .InvalidUnitMeasurementException;
-import quantitymeasurementapp .LengthUnit;
-import quantitymeasurementapp .Quantity;
-import quantitymeasurementapp .VolumneUnit;
-import quantitymeasurementapp .WeightUnit;
+import quantitymeasurementapp.InvalidUnitMeasurementException;
+import quantitymeasurementapp.LengthUnit;
+import quantitymeasurementapp.Quantity;
+import quantitymeasurementapp.VolumneUnit;
+import quantitymeasurementapp.WeightUnit;
 
 public class QuantityMeasurementAppTest {
 		Quantity<LengthUnit> len1;
@@ -725,5 +726,82 @@ public class QuantityMeasurementAppTest {
 	     @Test
 	     public void testConvertFromBaseUnit_LitreToLitre() {
 	    	 assertEquals(2.0, VolumneUnit.LITRE.convertFromBaseUnit(2.0));
+	     }
+	     
+//	     Arithmetic Operation 
+	     
+	     @Test
+	     public void testSubtraction_SameUnit_FeetMinusFeet() {
+	    	 assertEquals(5.0,new Quantity<>(10.0,LengthUnit.FEET).subtract(new Quantity<LengthUnit>(5.0, LengthUnit.FEET)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_SameUnit_LitreMinusLitre() {
+	    	 assertEquals(7.0,new Quantity<VolumneUnit>(10.0,VolumneUnit.LITRE).subtract(new Quantity<VolumneUnit>(3.0,VolumneUnit.LITRE)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_CrossUnit_FeetMinusInches() {
+	    	 assertEquals(9.5,new Quantity<LengthUnit>(10.0,LengthUnit.FEET).subtract(new Quantity<LengthUnit>(6.0,LengthUnit.INCHES)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_ExplicitTargetUnit_Feet() {
+	    	 assertEquals(114.0,new Quantity<>(10.0,LengthUnit.FEET).subtract(new Quantity<LengthUnit>(6.0,LengthUnit.INCHES),LengthUnit.INCHES).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_ResultingInNegative() {
+	    	 assertEquals(-5.0,new Quantity<LengthUnit>(5.0,LengthUnit.FEET).subtract(new Quantity<LengthUnit>(10.0,LengthUnit.FEET)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_ResultingInZero() {
+	    	 assertEquals(0.0, new Quantity<LengthUnit>(10.0,LengthUnit.FEET).subtract(new Quantity<LengthUnit>(120.0,LengthUnit.INCHES)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_WithNegativeValues() {
+	    	 assertEquals(7.0,new Quantity<>(5.0, LengthUnit.FEET).subtract(new Quantity<LengthUnit>(-2.0,LengthUnit.FEET)).getValue());
+	     }
+	     
+	     @Test
+	     public void testSubtraction_NullOperand() {
+	    	 assertThrows(IllegalArgumentException.class,()->{
+	    		 new Quantity<>(10.0, LengthUnit.FEET).subtract(null);
+	    	 });
+	     }
+	     
+	     @Test
+	     public void testDivision_SameUnit_FeetDividedByFeet() {
+	    	 assertEquals(5.0,new Quantity<>(10.0,LengthUnit.FEET).division(new Quantity<LengthUnit>(2.0,LengthUnit.FEET)).getValue());
+	     }
+	     
+	     @Test
+	     public void testDivision_SameUnit_LitreDividedByLitre() {
+	    	 assertEquals(2.0,new Quantity<>(10.0,VolumneUnit.LITRE).division(new Quantity<VolumneUnit>(5.0,VolumneUnit.LITRE)).getValue());
+	     }
+	     
+	     @Test
+	     public void testDivision_CrossUnit_FeetDividedByInches() {
+	    	
+	    	 assertEquals(1.0,new Quantity<>(24.0,LengthUnit.INCHES).division(new Quantity<LengthUnit>(2.0,LengthUnit.FEET)).getValue());
+	     }
+	     
+	     @Test
+	     public void testDivision_RatioGreaterThanOne() {
+	    	 assertTrue(new Quantity<>(10.0,LengthUnit.FEET).division(new Quantity<LengthUnit>(2.0,LengthUnit.FEET)).getValue()>1.0);
+	     }
+	     
+	     @Test
+	     public void testDivision_RatioLessThanOne() {
+	    	 assertTrue(new Quantity<>(5.0,LengthUnit.FEET).division(new Quantity<LengthUnit>(10.0,LengthUnit.FEET)).getValue()<1.0);
+	     }
+	     
+	     @Test 
+	     public void testDivision_ByZero() {
+	    	 assertThrows(ArithmeticException.class,()->{
+	    		new Quantity<>(10.0,LengthUnit.FEET).division(new Quantity<LengthUnit>(0.0,LengthUnit.FEET)) ;
+	    	 });
 	     }
 }
