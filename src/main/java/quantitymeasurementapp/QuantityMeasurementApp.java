@@ -1,7 +1,5 @@
 package quantitymeasurementapp ;
 
-
-
 public class QuantityMeasurementApp {
 
     public static<T extends IMeasurable> boolean demonstrateEquality(Quantity<T> quantity1,Quantity<T> quantity2) {
@@ -89,5 +87,19 @@ public class QuantityMeasurementApp {
         System.out.println("Division of Feet with feet : "+demonstrateDivision(new Quantity<LengthUnit>(10.0, LengthUnit.FEET), new Quantity<LengthUnit>(2.0, LengthUnit.FEET)));
        
         System.out.println("Division of inche with feet : "+demonstrateDivision(new Quantity<LengthUnit>(24.0,LengthUnit.INCHES),new Quantity<LengthUnit>(2.0,LengthUnit.FEET)));
+        
+        //Centralized Arithemetic Operation
+        
+        System.out.println("Centralized Addition feet to inches : "+demonstrateAddition(new Quantity<LengthUnit>(1.0, LengthUnit.FEET),new Quantity<LengthUnit>(12.0, LengthUnit.INCHES)));
+        
+        System.out.println("Centralized Addition of kg and gram to Gram : "+demonstrateAddition(new Quantity<WeightUnit>(10.0,WeightUnit.KG ), new Quantity<WeightUnit>(5000.0, WeightUnit.GRAM),WeightUnit.GRAM));
+        
+        System.out.println("Centralized Substraction of Feet and inches : "+demonstrateSubtract(new Quantity<LengthUnit>(10.0,LengthUnit.FEET),new Quantity<LengthUnit>(6.0,LengthUnit.INCHES)));
+        
+        System.out.println("centralized Subtraction Litre and Millitre : "+demonstrateSubtract(new Quantity<VolumneUnit>(5.0,VolumneUnit.LITRE), new Quantity<VolumneUnit>(2.0,VolumneUnit.LITRE),VolumneUnit.MILLILITRE));
+        
+        System.out.println("Centralized Division Feet by Feet : "+demonstrateDivision(new Quantity<LengthUnit>(10.0,LengthUnit.FEET), new Quantity<LengthUnit>(2.0,LengthUnit.FEET)));
+        
+        System.out.println("Centralized Division Inches by feet : "+demonstrateDivision(new Quantity<LengthUnit>(24.0,LengthUnit.INCHES), new Quantity<LengthUnit>(2.0,LengthUnit.FEET)));
 	}
 }
