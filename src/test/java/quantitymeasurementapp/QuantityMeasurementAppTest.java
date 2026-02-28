@@ -9,18 +9,23 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import quantitymeasurementapp.InvalidUnitMeasurementException;
-import quantitymeasurementapp.LengthUnit;
-import quantitymeasurementapp.Quantity;
-import quantitymeasurementapp.WeightUnit;
+import quantitymeasurementapp .InvalidUnitMeasurementException;
+import quantitymeasurementapp .LengthUnit;
+import quantitymeasurementapp .Quantity;
+import quantitymeasurementapp .VolumneUnit;
+import quantitymeasurementapp .WeightUnit;
 
 public class QuantityMeasurementAppTest {
 		Quantity<LengthUnit> len1;
 		Quantity<LengthUnit> len2;
+		
 		Quantity<WeightUnit> w1;
 		Quantity<WeightUnit> w2;
 		Quantity<WeightUnit> val1;
 		Quantity<WeightUnit> val2;
+		
+		Quantity<VolumneUnit> v1;
+		Quantity<VolumneUnit> v2;
 		
 		@Test
 		public void testMeasurableInterfaceLengthUnitImplementation() {
@@ -625,5 +630,100 @@ public class QuantityMeasurementAppTest {
 	    	 val2 = new Quantity<WeightUnit>(5000.0, WeightUnit.GRAM);
 	    	 
 	    	 assertEquals(10.0,val1.add(val2).getValue());
+	     }
+	     
+//	     Volume Unit
+	     @Test
+	     public void testEqualityLitreToLitreSameValue() {
+	    	 v1 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 v2 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 assertTrue(v1.equals(v2));
+	     }
+	     
+	     @Test
+	     public void testEqualityLitreToLitreDifferentValue() {
+	    	 v1 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 v2 = new Quantity<VolumneUnit>(2.0,VolumneUnit.LITRE);
+	    	 assertFalse(v1.equals(v2));
+	     }
+	     
+	     @Test
+	     public void testEquality_LitreToMillilitre_EquivalentValue() {
+	    	 v1 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 v2 = new Quantity<VolumneUnit>(1000.0,VolumneUnit.MILLILITRE);
+	    	 assertTrue(v1.equals(v2));
+	     }
+	     
+	     @Test
+	     public void testEquality_LitreToGallon_EquivalentValue() {
+	    	 v1 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 v2 = new Quantity<VolumneUnit>(0.264172,VolumneUnit.GALLON);
+	    	 assertTrue(v1.equals(v2));
+	     }
+	     
+	     @Test
+	     public void testEquality_GallonToLitre_EquivalentValue() {
+	    	 v1 = new Quantity<VolumneUnit>(3.78541,VolumneUnit.LITRE);
+	    	 v2 = new Quantity<VolumneUnit>(1.0,VolumneUnit.GALLON);
+	    	 assertTrue(v2.equals(v1));
+	     }
+	     
+	     @Test
+	     public void testEquality_NullComparison() {
+	    	 assertFalse(new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE).equals(null));
+	     }
+	     
+	     @Test
+	     public void testEquality_SameReference() {
+	    	 v1 = new Quantity<VolumneUnit>(1.0,VolumneUnit.LITRE);
+	    	 v2 = v1;
+	    	 assertTrue(v1.equals(v2));
+	     }
+	     
+	     @Test
+	     public void testEquality_NullUnit() {
+	    	 assertThrows(IllegalArgumentException.class,()->{
+	    		 v1 = new Quantity<VolumneUnit>(1.0,null); 
+	    	 });
+	     }
+	     
+	     @Test
+	     public void testEquality_ZeroValue() {
+	    	 assertTrue(new Quantity<>(0.0,VolumneUnit.LITRE).equals(new Quantity<>(0.0,VolumneUnit.MILLILITRE)));
+	     }
+	     
+	     @Test
+	     public void testEquality_NegativeVolume() {
+	    	 assertTrue(new Quantity<>(-1.0,VolumneUnit.LITRE).equals(new Quantity<>(-1000.0,VolumneUnit.MILLILITRE)));
+	     }
+	     @Test
+	     public void testConversion_LitreToMillilitre() {
+	    	 assertEquals(1000.0,new Quantity<>(1.0,VolumneUnit.LITRE).convertTo(VolumneUnit.MILLILITRE).getValue());
+	    	 
+	     }
+	     
+	     @Test
+	     public void testConversion_GallonToLitre() {
+	    	 assertEquals(3.78541, new Quantity<>(1.0,VolumneUnit.GALLON).convertTo(VolumneUnit.LITRE).getValue(),0.00001);
+	     }
+	     
+	     @Test
+	     public void testVolumeUnitEnum_GallonConstant() {
+	    	 assertEquals(3.78541, VolumneUnit.GALLON.getConversionFactor());
+	     }
+	     
+	     @Test
+	     public void testConvertToBaseUnit_LitreToLitre() {
+	    	 assertEquals(5.0,VolumneUnit.LITRE.convertToBaseUnit(5.0));
+	     }
+	     
+	     @Test
+	     public void testConvertToBaseUnit_MillilitreToLitre() {
+	    	 assertEquals(1.0,VolumneUnit.MILLILITRE.convertToBaseUnit(1000.0));
+	     }
+	     
+	     @Test
+	     public void testConvertFromBaseUnit_LitreToLitre() {
+	    	 assertEquals(2.0, VolumneUnit.LITRE.convertFromBaseUnit(2.0));
 	     }
 }
