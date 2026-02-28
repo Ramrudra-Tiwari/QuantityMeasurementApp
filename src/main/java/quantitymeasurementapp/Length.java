@@ -1,25 +1,11 @@
 package quantitymeasurementapp ;
 
+
 public class Length {
 	private static final double EPSILON = 0.0001;
 	private double value;
 	private LengthUnit len;
-     public enum LengthUnit{
-    	 FEET(12.0),
-    	 INCHES(1.0),
-    	 YARD(36.0),
-    	 CENTIMETRE(0.393701);
-    	 
-    	 private final double conversion;
-    	 
-    	LengthUnit(double conversion) {
-    		this.conversion = conversion;
-    	}
-    	
-    	public double getConversionFactor() {
-    		return conversion;
-    	}
-     }
+    
      public Length() {};
    
      public Length(double value,LengthUnit len) throws InvalidUnitMeasurementException {
@@ -40,12 +26,10 @@ public class Length {
     	 return len;
      }
 //     To convert value to their base unit  
-     private double convertToBaseUnit() {
-    	 return value*len.getConversionFactor();
-     }
+     
      public boolean compare(Length lengthUnit) {
     	 if(lengthUnit==null)return false;
-    	  return Math.abs(this.convertToBaseUnit() - lengthUnit.convertToBaseUnit()) < EPSILON;
+    	  return Math.abs(this.len.convertToBaseUnit(value) - lengthUnit.len.convertToBaseUnit(lengthUnit.getValue())) < EPSILON;
 	}
      
 //     overrided .equals methods to check if two units are equal or not 
@@ -69,7 +53,7 @@ public class Length {
      
     //Conversion of unit to current unit 
 	 public Length convertTo(LengthUnit unit) throws InvalidUnitMeasurementException {
-    	 double converted = (this.value*len.getConversionFactor())/unit.getConversionFactor();
+    	 double converted = (len.convertToBaseUnit(value))/unit.getConversionFactor();
     	 return new Length(converted,unit);
      }
 	 private double convertBaseToTargetUnit(double lengthInInches,LengthUnit targetUnit) {
@@ -98,8 +82,8 @@ public class Length {
 	 
 	 //Main Method to invoke the methods locally 
      public static void main(String[] args) throws InvalidUnitMeasurementException {
-		Length len1 = new Length(1,Length.LengthUnit.FEET);
-		Length len2 = new Length(12,Length.LengthUnit.INCHES);
+		Length len1 = new Length(1,LengthUnit.FEET);
+		Length len2 = new Length(12,LengthUnit.INCHES);
 		
 		System.out.println("Are Length equals? :"+len1.equals(len2));
 	    
