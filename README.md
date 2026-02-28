@@ -1,5 +1,5 @@
 # QuantityMeasurementApp
-feature/UC11-VolumeMeasurement
+feature/UC12-ArithmeticOperations
 
 🚀 Quantity Measurement Application
 📏 Test-Driven Development (TDD) | OOP | Clean Code | DRY Principle
@@ -27,6 +27,7 @@ main
       └── feature/UC9-WeightMeasurement
       └── feature/UC10-GenericQuantity
       └── feature/UC11-VolumeMeasurement
+      └── feature/UC12-ArithmeticOperations
 
           
 📅 18 Feb 2026
