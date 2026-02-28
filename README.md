@@ -1,6 +1,6 @@
 # QuantityMeasurementApp
 
-feature/UC7-targetUnitAddition
+feature/UC8-standalone
 
 🚀 Quantity Measurement Application
 📏 Test-Driven Development (TDD) | OOP | Clean Code | DRY Principle
@@ -24,6 +24,7 @@ main
       ├── feature/UC5-UnitToUnit
       ├── feature/UC6-UnitAddition
       └── feature/UC7-targetUnitAddition
+      └── feature/UC8-standalone
 📅 18 Feb 2026
 🔹 UC2 – Feet and Inches Measurement Equality
 Branch: feature/UC2-InchEquality
