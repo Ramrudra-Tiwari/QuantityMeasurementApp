@@ -2,6 +2,7 @@ package quantitymeasurementapp ;
 
 import quantitymeasurementapp.LengthUnit;
 
+
 public class QuantityMeasurementApp {
 	
 	public static  class FeetEquality {
@@ -132,6 +133,34 @@ public class QuantityMeasurementApp {
 	    	return len1.add(len2, targetUnit);
 	    }
 	
+	    //Weight Unit 
+	    public static boolean demonstrateWeightEquality(QuantityWeight val1,QuantityWeight val2) {
+	    	return val1.equals(val2);
+	    }
+	    
+	    public static boolean demonstrateWeightComparsion(QuantityWeight val1,QuantityWeight val2) {
+	    	return val1.compare(val2);
+	    }
+	    
+	    public static QuantityWeight demostrateWeightConversion(double d,WeightUnit unit,WeightUnit targetUnit) {
+	    	QuantityWeight temp = new QuantityWeight(d,unit);
+	    	temp = temp.convertTo(targetUnit);
+	    	return temp;
+	    }
+	    
+	    public static QuantityWeight demostrateWeightConversion(QuantityWeight val,WeightUnit target) {
+	    	val = val.convertTo(target);
+	    	return val;
+	    }
+	    
+	    public static QuantityWeight demostrateWeightAddition(QuantityWeight val1 ,QuantityWeight val2) {
+	    	return val1.add(val2);
+	    }
+	    
+	    public static QuantityWeight demostrateWeightAddition(QuantityWeight val1 ,QuantityWeight val2,WeightUnit target) {
+	    	return val1.add(val2, target);
+	    }
+	    
       public static void main(String[] args) throws InvalidUnitMeasurementException {
     	  
 	    demonstrateFeetEquality(1,1);
@@ -210,6 +239,40 @@ public class QuantityMeasurementApp {
        System.out.println("ConvertToBaseUnit : "+LengthUnit.FEET.convertToBaseUnit(12.0));
        
        System.out.println("ConvertToBaseUnit : "+LengthUnit.INCHES.convertToBaseUnit(12.0));
+       
+       //Weight Class 
+       
+       System.out.println("Equal Kg To Kg : "+demonstrateWeightEquality(new QuantityWeight(1.0,WeightUnit.KG), new QuantityWeight(1.0, WeightUnit.KG)));
+       
+       System.out.println("Equal Kg To Gram : "+demonstrateWeightEquality(new QuantityWeight(1.0, WeightUnit.KG), new QuantityWeight(1000.0, WeightUnit.GRAM)));
+       
+       System.out.println("Equal Pound To Pound : "+demonstrateWeightEquality(new QuantityWeight(2.0,WeightUnit.POUND),new QuantityWeight(2.0, WeightUnit.POUND)));
+       
+       System.out.println("Equal Kg to Pound : "+demonstrateWeightEquality(new QuantityWeight(1.0,WeightUnit.KG), new QuantityWeight(2.20462, WeightUnit.POUND)));
+      
+       System.out.println("Equal Pound To Gram : "+demonstrateWeightEquality(new QuantityWeight(1.0, WeightUnit.POUND), new QuantityWeight(453.592, WeightUnit.GRAM)));
+       
+       System.out.println("Convert kg to gram : "+new QuantityWeight(1.0,WeightUnit.KG).convertTo(WeightUnit.GRAM).toString());
+       
+       System.out.println("Convert Pound To Kilogram : "+new QuantityWeight(2.0,WeightUnit.POUND).convertTo(WeightUnit.KG));
+       
+       System.out.println("Convert Gram To Pound : "+ new QuantityWeight(500.0,WeightUnit.GRAM));
+       
+       System.out.println("Convert Kg To Gram : "+ new QuantityWeight(0.0,WeightUnit.KG).convertTo(WeightUnit.GRAM)); 
+       
+       System.out.println("Addition Kg with Kg : "+demostrateWeightAddition(new QuantityWeight(1.0,WeightUnit.KG),new QuantityWeight(2.0,WeightUnit.KG)));
+       
+       System.out.println("Addition kg with gram : "+demostrateWeightAddition(new QuantityWeight(1.0,WeightUnit.KG),new QuantityWeight(1000.0,WeightUnit.GRAM)));
+       
+       System.out.println("Addition gram with kg : "+demostrateWeightAddition(new QuantityWeight(500.0,WeightUnit.GRAM),new QuantityWeight(0.5,WeightUnit.KG)));
+       
+       System.out.println("Addition of kg with gram to gram : "+demostrateWeightAddition(new QuantityWeight(1.0,WeightUnit.KG),new QuantityWeight(1000.0,WeightUnit.GRAM),WeightUnit.GRAM));
+       
+       System.out.println("Addition of pound with gram to pound : "+demostrateWeightAddition(new QuantityWeight(1.0,WeightUnit.POUND),new QuantityWeight(453.592,WeightUnit.GRAM),WeightUnit.POUND));
+       
+       System.out.println("Addition of kg with pound to kg : "+demostrateWeightAddition(new QuantityWeight(2.0,WeightUnit.KG),new QuantityWeight(4.0,WeightUnit.POUND),WeightUnit.KG));
+       
+       
       }
       
 }
