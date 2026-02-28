@@ -1,5 +1,6 @@
 package quantitymeasurementapp;
 
+
 public class Quantity<T extends IMeasurable> {
      private double value;
      private T unit;
