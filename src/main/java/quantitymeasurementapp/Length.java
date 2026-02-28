@@ -1,6 +1,5 @@
 package quantitymeasurementapp ;
 
-
 public class Length {
 	private static final double EPSILON = 0.0001;
 	private double value;
