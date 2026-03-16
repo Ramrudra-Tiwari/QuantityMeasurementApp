@@ -106,6 +106,9 @@ public class QuantityMeasurementApp {
 	    			app.controller.performAddition(q1, q2)
 	    		);
 	    
+	    
+	    
+	    
 	    System.out.println(
 	    		app.controller.performComparison(
 	                    new QuantityDTO(1.0, VolumeUnit.LITRE),
