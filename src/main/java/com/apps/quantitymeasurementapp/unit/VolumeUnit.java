@@ -32,7 +32,11 @@ public enum VolumeUnit implements IMeasurable{
 
 	@Override
 	public String getUnitName() {
-		return VolumeUnit.class.getName();
+		return this.name();
 	}
 	
+	@Override
+	public String getMeasurableType() {
+		return this.getClass().getSimpleName();
+	}
 }

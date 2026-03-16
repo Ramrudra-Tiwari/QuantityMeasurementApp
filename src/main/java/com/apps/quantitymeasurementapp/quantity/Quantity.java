@@ -83,7 +83,7 @@ public class Quantity<U extends IMeasurable> {
 	//division
 	public double divide(Quantity<U> other){
 		if(other.unit.getClass()!=this.unit.getClass()) {
-			throw new IllegalArgumentException("Can't possible substract between another units!");
+			throw new IllegalArgumentException("Incompatible units for division");
 		}
 		this.validateArithmeticOperands(other, null, false);
 		double baseResult = performBaseArithmetic(other, ArithmeticOperation.DIVIDE);

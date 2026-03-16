@@ -55,6 +55,18 @@ public class QuantityMeasurementEntity implements java.io.Serializable{
         this.resultMeasurementType = resultMeasurementType;
         this.isError = false;
     }
+    
+    public QuantityMeasurementEntity(double thisValue, String thisUnit, String thisMeasurementType, double thatValue, String thatUnit, String thatMeasurementType, String operation, double resultValue, String resultUnit, String resultMeasurementType, String resultString, boolean isError, String errorMessage) {
+        initializeCommonFields(thisValue, thisUnit, thisMeasurementType, thatValue, thatUnit, thatMeasurementType, operation);
+        this.resultValue = resultValue;
+        this.resultUnit = resultUnit;
+        this.resultMeasurementType = resultMeasurementType;
+
+        this.resultString = resultString;
+
+        this.isError = isError;
+        this.errorMessage = errorMessage;
+    }
 
 
     /*

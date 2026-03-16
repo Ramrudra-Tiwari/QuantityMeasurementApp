@@ -1,3 +1,4 @@
+
 package com.apps.quantitymeasurementapp.unit;
 
 public enum LengthUnit implements IMeasurable{
@@ -31,6 +32,11 @@ public enum LengthUnit implements IMeasurable{
 
 	@Override
 	public String getUnitName() {
-		return LengthUnit.this.toString();
+		return this.name();
+	}
+	
+	@Override
+	public String getMeasurableType() {
+		return this.getClass().getSimpleName();
 	}
 }
