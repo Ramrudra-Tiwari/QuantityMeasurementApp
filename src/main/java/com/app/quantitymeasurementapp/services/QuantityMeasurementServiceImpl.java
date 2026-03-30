@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import org.springframework.stereotype.Service;
-import com.app.quantitymeasurementapp.entity.QuantityDTO;
-import com.app.quantitymeasurementapp.entity.QuantityMeasurementDTO;
-import com.app.quantitymeasurementapp.model.Quantity;
+
+import com.app.quantitymeasurementapp.dto.QuantityDTO;
+import com.app.quantitymeasurementapp.dto.QuantityMeasurementDTO;
 import com.app.quantitymeasurementapp.model.QuantityMeasurementEntity;
 import com.app.quantitymeasurementapp.model.QuantityModel;
+import com.app.quantitymeasurementapp.quantity.Quantity;
 import com.app.quantitymeasurementapp.repository.QuantityMeasurentRepository;
 import com.app.quantitymeasurementapp.unit.IMeasurable;
 import com.app.quantitymeasurementapp.unit.LengthUnit;
@@ -162,9 +163,9 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
 		QuantityDTO q5 = new QuantityDTO(q3.getValue(),q3.getUnit().getUnitName(),q3.getUnit().getClass().getSimpleName());
 		
 		repository.save(new QuantityMeasurementEntity(thisQuantityDTO, thatQuantityDTO, Operation.ARITHMETIC.toString(),q5));
-		 return  new QuantityMeasurementDTO(thisQuantityDTO.getValue(),thisQuantityDTO.getUnit(),thisQuantityDTO.getMeasurementType(),thatQuantityDTO.getValue(),thatQuantityDTO.getUnit(),thatQuantityDTO.getMeasurementType(),Operation.CONVERSION.toString(),"SUCCESS",q5.getValue(),q5.getUnit(),q5.getMeasurementType(),"NoError", false);}
+		 return  new QuantityMeasurementDTO(thisQuantityDTO.getValue(),thisQuantityDTO.getUnit(),thisQuantityDTO.getMeasurementType(),thatQuantityDTO.getValue(),thatQuantityDTO.getUnit(),thatQuantityDTO.getMeasurementType(),Operation.ARITHMETIC.toString(),"SUCCESS",q5.getValue(),q5.getUnit(),q5.getMeasurementType(),"NoError", false);}
     	catch(Exception e) {
-	     return  new QuantityMeasurementDTO(thisQuantityDTO.getValue(),thisQuantityDTO.getUnit(),thisQuantityDTO.getMeasurementType(),thatQuantityDTO.getValue(),thatQuantityDTO.getUnit(),thatQuantityDTO.getMeasurementType(),Operation.CONVERSION.toString(),"SUCCESS",0,null,null,e.getMessage(),true);
+	     return  new QuantityMeasurementDTO(thisQuantityDTO.getValue(),thisQuantityDTO.getUnit(),thisQuantityDTO.getMeasurementType(),thatQuantityDTO.getValue(),thatQuantityDTO.getUnit(),thatQuantityDTO.getMeasurementType(),Operation.ARITHMETIC.toString(),"SUCCESS",0,null,null,e.getMessage(),true);
 
 	}
 	}
@@ -194,13 +195,13 @@ public class QuantityMeasurementServiceImpl implements IQuantityMeasurementServi
 	}
     private QuantityModel<?> getQuantityInstance(QuantityDTO dto){
     	switch(dto.getMeasurementType()) {
-    	case "VOLUME":
+    	case "VolumeUnit":
     		return new QuantityModel<>(dto.getValue(),VolumneUnit.valueOf(dto.getUnit()));
-    	case "WEIGHT":
+    	case "WeightUnit":
     		return new QuantityModel<>(dto.getValue(),WeightUnit.valueOf(dto.getUnit()));
-    	case "LENGTH":
+    	case "LengthUnit":
     		return new QuantityModel<>(dto.getValue(),LengthUnit.valueOf(dto.getUnit()));
-    	case "TEMPERATURE":
+    	case "TemperatureUnit":
     		return new QuantityModel<>(dto.getValue(),Temperature.valueOf(dto.getUnit()));
     	default:
     		throw new IllegalArgumentException("The Unit Does Not Exists");

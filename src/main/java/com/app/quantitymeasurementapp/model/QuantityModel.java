@@ -1,5 +1,5 @@
-package com.app.quantitymeasurementapp.model;
 
+package com.app.quantitymeasurementapp.model;
 
 import com.app.quantitymeasurementapp.unit.IMeasurable;
 

@@ -1,5 +1,6 @@
 package com.app.quantitymeasurementapp.controller;
 
+import com.app.quantitymeasurementapp.dto.*;
 import com.app.quantitymeasurementapp.services.IQuantityMeasurementService;
 
 import java.util.List;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.quantitymeasurementapp.entity.*;
-
 @RestController
 @RequestMapping("/api/v1/quantities")
 @Tag(name = "Quantity Measurements", description = "REST API for quantity measurement operations")
@@ -33,21 +32,21 @@ public class QuantityMeasurementController {
 	 }
 	 
 	 private static final String EX_FEET_INCH = """ 
-	 	   { "thisQuantityDTO": {"value":1.0,"unit":"FEET", "measurementType":"LENGTH"},
-			 "thatQuantityDTO": {"value": 12.0,"unit":"INCHES", "measurementType":"LENGTH"} }""";
+	 	   { "thisQuantityDTO": {"value":1.0,"unit":"FEET", "measurementType":"LengthUnit"},
+			 "thatQuantityDTO": {"value": 12.0,"unit":"INCHES", "measurementType":"LengthUnit"} }""";
 	 private static final String EX_YARD_FEET = """
-			 { "thisQuantityDTO": {"value":1.0,"unit":"YARDS", "measurementType":"LENGTH"},
-			 "thatQuantityDTO": {"value":3.0,"unit":"FEET", "measurementType":"LENGTH"} }""";
+			 { "thisQuantityDTO": {"value":1.0,"unit":"YARDS", "measurementType":"LengthUnit"},
+			 "thatQuantityDTO": {"value":3.0,"unit":"FEET", "measurementType":"LengthUnit"} }""";
 	 private static final String EX_GALLON_LITRE = """
-			 { "thisQuantityDTO": {"value":1.0,"unit":"GALLON", "measurementType":"VOLUMNE"},
-			 "thatQuantityDTO": {"value":3.785,"unit":"LITRE", "measurementType":"VOLUMNE"} }""";
+			 { "thisQuantityDTO": {"value":1.0,"unit":"GALLON", "measurementType":"VolumeUnit"},
+			 "thatQuantityDTO": {"value":3.785,"unit":"LITRE", "measurementType":"VolumeUnit"} }""";
 	 private static final String EX_TEMP = """
-			 { "thisQuantityDTO": {"value":212.0,"unit":"FAHRENHEIT", "measurementType":"TEMPERATURE"},
-			 "thatQuantityDTO": {"value":100.0,"unit":"CELSIUS", "measurementType":"TEMPERATURE"} }""";
+			 { "thisQuantityDTO": {"value":212.0,"unit":"FAHRENHEIT", "measurementType":"TemperatureUnit"},
+			 "thatQuantityDTO": {"value":100.0,"unit":"CELSIUS", "measurementType":"TemperatureUnit"} }""";
 	 private static final String EX_WITH_TARGET = """
-			 { "thisQuantityDTO": {"value":1.0, "unit":"FEET", "measurementType":"LENGTH"},
-			 "thatQuantityDTO": {"value":12.0,"unit":"INCHES", "measurementType":"LENGTH"},
-			 "targetQuantityDTO": {"value":0.0, "unit":"INCHES", "measurementType":"LENGTH"} }""";
+			 { "thisQuantityDTO": {"value":1.0, "unit":"FEET", "measurementType":"LengthUnit"},
+			 "thatQuantityDTO": {"value":12.0,"unit":"INCHES", "measurementType":"LengthUnit"},
+			 "targetQuantityDTO": {"value":0.0, "unit":"INCHES", "measurementType":"LengthUnit"} }""";
 	 
 	 @PostMapping("/compare")
 	 @Operation(summary = "Compare two quantities",
@@ -162,7 +161,7 @@ public class QuantityMeasurementController {
 	 @GetMapping("/history/type/{type}")
 	 @Operation(
 	 summary = "Get operation history by type",
-	 description = "Valid types: LENGTH, VOLUMNE, WEIGHT, TEMPERATURE"
+	 description = "Valid types: LengthUnit, VolumeUnit, WeightUnit, TemperatureUnit"
 )
 	 public ResponseEntity<List<QuantityMeasurementDTO>> getOperationHistoryByType(String type){
 		 return ResponseEntity.ok(quantityMeasurementService.getMeasurementsByType(type));

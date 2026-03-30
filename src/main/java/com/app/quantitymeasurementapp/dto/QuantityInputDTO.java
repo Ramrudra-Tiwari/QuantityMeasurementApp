@@ -1,5 +1,4 @@
-package com.app.quantitymeasurementapp.entity;
-
+package com.app.quantitymeasurementapp.dto;
 
 
 import io.swagger.v3.oas.annotations.media.Schema;

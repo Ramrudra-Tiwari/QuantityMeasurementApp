@@ -2,7 +2,8 @@ package com.app.quantitymeasurementapp.model;
 
 import java.util.Objects;
 
-import com.app.quantitymeasurementapp.entity.QuantityDTO;
+import com.app.quantitymeasurementapp.dto.QuantityDTO;
+
 import java.time.*;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

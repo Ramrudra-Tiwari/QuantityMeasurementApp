@@ -1,9 +1,10 @@
+
 package com.app.quantitymeasurementapp.services;
 
-
-import com.app.quantitymeasurementapp.entity.QuantityDTO;
-import com.app.quantitymeasurementapp.entity.QuantityMeasurementDTO;
 import java.util.*;
+
+import com.app.quantitymeasurementapp.dto.QuantityDTO;
+import com.app.quantitymeasurementapp.dto.QuantityMeasurementDTO;
 
 public interface IQuantityMeasurementService {
 	
