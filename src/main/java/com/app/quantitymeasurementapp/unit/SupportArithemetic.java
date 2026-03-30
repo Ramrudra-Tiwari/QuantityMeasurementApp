@@ -1,5 +1,5 @@
 package com.app.quantitymeasurementapp.unit;
-
+//
 
 @FunctionalInterface
 interface SupportArithemetic {

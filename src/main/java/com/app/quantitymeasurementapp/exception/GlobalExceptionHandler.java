@@ -1,4 +1,6 @@
 package com.app.quantitymeasurementapp.exception;
+//hiii
+
 
 import java.util.logging.Logger;
 
@@ -38,6 +40,8 @@ public class GlobalExceptionHandler {
 	" for request path: " + error.path);
 	return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
+	
+	
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleGlobalException(Exception ex,WebRequest request){
