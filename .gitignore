@@ -1,7 +1,8 @@
-    .classpath
-        .factorypath
-        .project
-        .settings/
-        HELP.md
-        bin/
-        target/
+
+
+
+target/
+.classpath
+.project
+.settings/
+.factorypath
