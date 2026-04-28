@@ -14,7 +14,7 @@ import java.util.List;
 public class CorsConfig {
 
     // Allowed frontend origins (from application.properties)
-    @Value("${app.cors.allowed-origins:http://localhost:3000}")
+    @Value("${app.cors.allowed-origins:https://quantity-measurement-app-frontend-virid.vercel.app/}")
     private String[] allowedOrigins;
 
     @Bean
